@@ -26,6 +26,7 @@ How It Works
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 What I Learned
+
 This project helped me:
 - Practice basic Python concepts like loops, conditionals, and exception handling.
 - Use functions to modularize and simplify code.
