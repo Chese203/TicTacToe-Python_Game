@@ -1,5 +1,5 @@
 def display_board(board):
-    # The function accepts one parameter containing the board's current status
+    # Accepts one parameter containing the board's current status
     # and prints it out to the console.
     print('+-------+-------+-------+')
     for row in board:
@@ -11,10 +11,12 @@ def display_board(board):
         print('+-------+-------+-------+')
 
 def enter_move(board):
-    # The function accepts the board's current status, asks the user about their move, 
+    # Accepts the board's current status, asks the user for their move, 
     # checks the input, and updates the board according to the user's decision.
+    
     while True:  # Infinite loop to keep prompting until valid input
-        try:
+        # Input validation to ensure a correct number is given
+        try: 
             move = int(input('Enter your move (1-9): '))
         except ValueError:
             print('Invalid input. Please enter a number between 1 and 9.')
@@ -34,7 +36,7 @@ def enter_move(board):
 
     
 def make_list_of_free_fields(board):
-    # The function browses the board and builds a list of all the free squares; 
+    # Browses the board and builds a list of all the free squares; 
     # the list consists of tuples, while each tuple is a pair of row and column numbers.
     free_fields = []
     
@@ -46,22 +48,28 @@ def make_list_of_free_fields(board):
     return free_fields
     
 def victory_for(board, sign):
-    # The function analyzes the board's status in order to check if 
+    # Analyzes the board's status in order to check if 
     # the player using 'O's or 'X's has won the game
+
+    # Checks if a row is complete 
     for row in range(3):
         if board[row][0] == sign and board[row][1] == sign and board[row][2] == sign:
             return True
+    # Checks if a column is complete
     for col in range(3):
         if board[0][col] == sign and board[1][col] == sign and board[2][col] == sign:
             return True
-    if (board[0][0] == sign and board[1][1] == sign and board[2][2] == sign):  # Top-left to bottom-right
+   # Checks top-left to bottom-right
+    if (board[0][0] == sign and board[1][1] == sign and board[2][2] == sign):  
         return True
-    if (board[0][2] == sign and board[1][1] == sign and board[2][0] == sign):  # Top-right to bottom-left
+    
+    # Checks top-right to bottom-left
+    if (board[0][2] == sign and board[1][1] == sign and board[2][0] == sign):  
         return True
     return False
 
 def draw_move(board):
-    # The function draws the computer's move and updates the board.
+    # Draws the computer's move and updates the board.
     from random import randrange
     
     while True:
@@ -74,9 +82,9 @@ def draw_move(board):
                     display_board(board)
                     return
 
-#Main Function Run
+# Main Function Run
 
-#Initialize the board and victory variable
+# Initialize the board and victory variable
 board =[
         [1,2,3],
         [4,5,6],
@@ -84,14 +92,15 @@ board =[
         ]
 victory = False
 
-#Show the board at the start
+# Show the board at the start
 display_board(board)
 
-#computer takes its designated first move
+# Computer takes its designated first move
 print('First, my move!')
 board[1][1] = 'X'
 display_board(board)
 
+# Starts the loop to check who has won
 while not victory:
     
     if not make_list_of_free_fields(board):
@@ -107,10 +116,11 @@ while not victory:
         display_board(board)
         print('I win!')
         break 
-    #player is prompted for their first move. If valid, the board is updated and shown 
+    # Player is prompted for their first move. If valid, the board is updated and shown 
     enter_move(board)
     display_board(board)
     
+# AFter the player move, checks for winners again 
     if not make_list_of_free_fields(board):
         print('Draw!')
         break
